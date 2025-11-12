@@ -1,0 +1,46 @@
+{
+  "top_led": {
+    "start": "20:00",
+    "stop": "04:59"
+  },
+  "mid_led": {
+    "start": "20:00",
+    "stop": "04:59"
+  },
+  "bot_led": {
+    "start": "20:00",
+    "stop": "04:59"
+  },
+  "top_led2": {
+    "start": "20:00",
+    "stop": "04:59"
+  },
+  "top_led3": {
+    "start": "20:00",
+    "stop": "04:59"
+  },
+  "bot_led2": {
+    "start": "20:00",
+    "stop": "04:59"
+  },
+  "bot_led3": {
+    "start": "20:00",
+    "stop": "04:59"
+  },
+  "under_led1": {
+    "start": "20:00",
+    "stop": "04:59"
+  },
+  "under_led2": {
+    "start": "20:00",
+    "stop": "04:59"
+  },
+  "under_led3": {
+    "start": "20:00",
+    "stop": "04:59"
+  },
+  "under_led4": {
+    "start": "20:00",
+    "stop": "04:59"
+  }
+}

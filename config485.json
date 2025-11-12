@@ -1,0 +1,50 @@
+{
+  "top_led2": {
+    "mode": "auto",
+    "enable": true,
+    "start_hour": 20,
+    "stop_hour": 5
+  },
+  "top_led3": {
+    "mode": "auto",
+    "enable": true,
+    "start_hour": 20,
+    "stop_hour": 5
+  },
+  "bot_led2": {
+    "mode": "auto",
+    "enable": true,
+    "start_hour": 20,
+    "stop_hour": 5
+  },
+  "bot_led3": {
+    "mode": "auto",
+    "enable": true,
+    "start_hour": 20,
+    "stop_hour": 5
+  },
+  "under_led1": {
+    "mode": "auto",
+    "enable": true,
+    "start_hour": 20,
+    "stop_hour": 5
+  },
+  "under_led2": {
+    "mode": "auto",
+    "enable": true,
+    "start_hour": 20,
+    "stop_hour": 5
+  },
+  "under_led3": {
+    "mode": "auto",
+    "enable": true,
+    "start_hour": 20,
+    "stop_hour": 5
+  },
+  "under_led4": {
+    "mode": "auto",
+    "enable": true,
+    "start_hour": 20,
+    "stop_hour": 5
+  }
+}

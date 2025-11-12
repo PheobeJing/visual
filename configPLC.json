@@ -1,0 +1,35 @@
+{
+  "uv": {
+    "enable": true,
+    "start_hour": 3,
+    "stop_hour": 6
+  },
+  "water_pump": {
+    "enable": true,
+    "interval_minutes": 30,
+    "duration_seconds": 60
+  },
+  "water_spray": {
+    "enable": false,
+    "interval_minutes": 999,
+    "duration_seconds": 1
+  },
+  "top_led": {
+    "mode": "auto",
+    "enable": true,
+    "start_hour": 20,
+    "stop_hour": 5
+  },
+  "mid_led": {
+    "mode": "auto",
+    "enable": true,
+    "start_hour": 20,
+    "stop_hour": 5
+  },
+  "bot_led": {
+    "mode": "auto",
+    "enable": true,
+    "start_hour": 20,
+    "stop_hour": 5
+  }
+}

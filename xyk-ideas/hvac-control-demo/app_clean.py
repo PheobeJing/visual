@@ -453,7 +453,7 @@ app.layout = html.Div([
         id='action-audio',
         controls=False,  # 隐藏控制栏
         preload='none',  # 不预加载
-        autoPlay=True,   # 自动播放 (注意：Dash中使用autoPlay)
+        autoplay=True,   # 自动播放
         style={'display': 'none'}  # 隐藏元素
     ),
 

@@ -287,7 +287,7 @@ class HVACControlSimulator:
             ))
             actions.append(ControlAction(
                 timestamp=current_time, device=DeviceType.ASHP,
-                action=ActionType.ASHP_COOLING, is_instant=False, duration=20.0
+                action=ActionType.ASHP_COOLING, is_instant=False, duration=40.0
             ))
             self.state.ashp_on = True
             self.state.ashp_mode = "制冷"
@@ -301,7 +301,7 @@ class HVACControlSimulator:
             ))
             actions.append(ControlAction(
                 timestamp=current_time, device=DeviceType.ASHP,
-                action=ActionType.ASHP_HEATING, is_instant=False, duration=20.0
+                action=ActionType.ASHP_HEATING, is_instant=False, duration=40.0
             ))
             self.state.ashp_on = True
             self.state.ashp_mode = "制热"
@@ -309,7 +309,7 @@ class HVACControlSimulator:
 
         # 温度达标 -> 关闭ASHP
         elif self.state.ashp_on and 22.0 <= temp <= 23.0:
-            if np.random.random() < 0.3:  # 30%概率关闭
+            if np.random.random() < 0.5:  # 50%概率关闭 - 更频繁
                 actions.append(ControlAction(
                     timestamp=current_time, device=DeviceType.ASHP,
                     action=ActionType.ASHP_OFF, is_instant=True
@@ -320,41 +320,41 @@ class HVACControlSimulator:
         # ========== ASHP 模式切换（运行时微调） ==========
         if self.state.ashp_on:
             # 设定温度微调
-            if np.random.random() < 0.25:  # 25%概率调整设定温度
+            if np.random.random() < 0.45:  # 45%概率调整设定温度 - 更频繁
                 if temp > self.state.ashp_setpoint + 0.5:
                     actions.append(ControlAction(
                         timestamp=current_time, device=DeviceType.ASHP,
-                        action=ActionType.ASHP_TEMP_DOWN, is_instant=False, duration=5.0
+                        action=ActionType.ASHP_TEMP_DOWN, is_instant=False, duration=20.0
                     ))
                     self.state.ashp_setpoint = max(20.0, self.state.ashp_setpoint - 0.5)
                 elif temp < self.state.ashp_setpoint - 0.5:
                     actions.append(ControlAction(
                         timestamp=current_time, device=DeviceType.ASHP,
-                        action=ActionType.ASHP_TEMP_UP, is_instant=False, duration=5.0
+                        action=ActionType.ASHP_TEMP_UP, is_instant=False, duration=20.0
                     ))
                     self.state.ashp_setpoint = min(26.0, self.state.ashp_setpoint + 0.5)
 
             # 风速调节（更频繁）
-            if np.random.random() < 0.3:  # 30%概率调整风速
+            if np.random.random() < 0.5:  # 50%概率调整风速 - 更频繁
                 temp_diff = abs(temp - self.state.ashp_setpoint)
                 if temp_diff > 1.0 and self.state.ashp_fan_speed < 5:
                     actions.append(ControlAction(
                         timestamp=current_time, device=DeviceType.ASHP,
-                        action=ActionType.ASHP_FAN_UP, is_instant=False, duration=8.0
+                        action=ActionType.ASHP_FAN_UP, is_instant=False, duration=25.0
                     ))
                     self.state.ashp_fan_speed = min(5, self.state.ashp_fan_speed + 1)
                 elif temp_diff < 0.5 and self.state.ashp_fan_speed > 1:
                     actions.append(ControlAction(
                         timestamp=current_time, device=DeviceType.ASHP,
-                        action=ActionType.ASHP_FAN_DOWN, is_instant=False, duration=8.0
+                        action=ActionType.ASHP_FAN_DOWN, is_instant=False, duration=25.0
                     ))
                     self.state.ashp_fan_speed = max(1, self.state.ashp_fan_speed - 1)
 
             # 除湿模式切换
-            if hum > 65 and self.state.ashp_mode != "除湿" and np.random.random() < 0.2:
+            if hum > 65 and self.state.ashp_mode != "除湿" and np.random.random() < 0.35:
                 actions.append(ControlAction(
                     timestamp=current_time, device=DeviceType.ASHP,
-                    action=ActionType.ASHP_DEHUMID, is_instant=False, duration=15.0
+                    action=ActionType.ASHP_DEHUMID, is_instant=False, duration=35.0
                 ))
                 self.state.ashp_mode = "除湿"
 
@@ -389,17 +389,17 @@ class HVACControlSimulator:
             self.state.erv_on = False
 
         # ERV风速动态调节
-        if self.state.erv_on and np.random.random() < 0.2:  # 20%概率调整
+        if self.state.erv_on and np.random.random() < 0.4:  # 40%概率调整 - 更频繁
             if hum > 60 and self.state.erv_fan_speed < 3:
                 actions.append(ControlAction(
                     timestamp=current_time, device=DeviceType.ERV,
-                    action=ActionType.ERV_FAN_UP, is_instant=False, duration=10.0
+                    action=ActionType.ERV_FAN_UP, is_instant=False, duration=30.0
                 ))
                 self.state.erv_fan_speed = min(3, self.state.erv_fan_speed + 1)
             elif hum < 55 and self.state.erv_fan_speed > 1:
                 actions.append(ControlAction(
                     timestamp=current_time, device=DeviceType.ERV,
-                    action=ActionType.ERV_FAN_DOWN, is_instant=False, duration=10.0
+                    action=ActionType.ERV_FAN_DOWN, is_instant=False, duration=30.0
                 ))
                 self.state.erv_fan_speed = max(1, self.state.erv_fan_speed - 1)
 
